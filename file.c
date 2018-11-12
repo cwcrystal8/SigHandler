@@ -6,8 +6,8 @@
 
 static void sighandler(int signo){
   if(signo == SIGINT){
-    int fd = open("text.txt",O_WRONLY|O_CREAT,0777);
-    write(fd, "Exited due to SIGINT\n",20);
+    int fd = open("text.txt",O_APPEND|O_CREAT|O_WRONLY,0777);
+    write(fd, "Exited due to SIGINT\n",21);
     close(fd);
     //printf("\nExited due to SIGINT\n");
     exit(0);
