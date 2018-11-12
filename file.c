@@ -2,10 +2,14 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 static void sighandler(int signo){
   if(signo == SIGINT){
-    printf("\nExited due to SIGINT\n");
+    int fd = open("text.txt",O_WRONLY|O_CREAT,0777);
+    write(fd, "Exited due to SIGINT\n",20);
+    close(fd);
+    //printf("\nExited due to SIGINT\n");
     exit(0);
   }
   if(signo == SIGUSR1){
